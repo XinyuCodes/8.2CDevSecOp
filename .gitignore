@@ -1,2 +1,19 @@
+<<<<<<< HEAD
 
 nodejs-goof/
+=======
+.DS_Store
+node_modules
+*.sock
+
+.sass-cache
+sass
+config.rb
+npm-debug.log
+
+.dccache
+.dcignore
+.idea/
+.dccache
+
+>>>>>>> d240896711e31c540fc1cab79ae2e4cf63f00b1a
