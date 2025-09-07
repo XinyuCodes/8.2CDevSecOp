@@ -32,12 +32,36 @@ pipeline {
     }
 
     post {
-        always {
-            emailext (
-                subject: "Pipeline ${currentBuild.result}: ${env.JOB_NAME} - Build ${env.BUILD_NUMBER}",
-                body: "Build ${currentBuild.result}. Check: ${env.BUILD_URL}",
-                to: "xinyu.shi05@outlook.com"
-            )
+        failure {
+            mail to: 's223908562@deakin.edu.au',
+                 subject: "❌ Build Failed: ${env.JOB_NAME} - ${env.BUILD_NUMBER}",
+                 body: """
+                 Build failed!
+                 
+                 Job: ${env.JOB_NAME}
+                 Build Number: ${env.BUILD_NUMBER}
+                 Build URL: ${env.BUILD_URL}
+                 
+                 Please check the console output for details.
+                 """
+        }
+        
+        success {
+            mail to: 's223908562@deakin.edu.au',
+                 subject: "✅ Build Successful: ${env.JOB_NAME} - ${env.BUILD_NUMBER}",
+                 body: """
+                 Build completed successfully!
+                 
+                 Job: ${env.JOB_NAME}
+                 Build Number: ${env.BUILD_NUMBER}
+                 Build URL: ${env.BUILD_URL}
+                 """
+        }
+        
+        unstable {
+            mail to: 's223908562@deakin.edu.au',
+                 subject: "⚠️ Build Unstable: ${env.JOB_NAME} - ${env.BUILD_NUMBER}",
+                 body: "Build completed but is unstable. Check: ${env.BUILD_URL}"
         }
     }
 }
