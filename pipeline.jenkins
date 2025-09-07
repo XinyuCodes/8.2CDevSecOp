@@ -30,4 +30,14 @@ pipeline {
             }
         }
     }
+
+    post {
+        always {
+            emailext (
+                subject: "Pipeline ${currentBuild.result}: ${env.JOB_NAME} - Build ${env.BUILD_NUMBER}",
+                body: "Build ${currentBuild.result}. Check: ${env.BUILD_URL}",
+                to: "xinyu.shi05@outlook.com"
+            )
+        }
+    }
 }
