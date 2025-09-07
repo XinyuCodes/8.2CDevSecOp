@@ -1,6 +1,11 @@
 pipeline {
     agent any
     stages {
+
+        tools {
+             nodejs 'node-16'  // Use the exact name from step 2
+        }
+
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/XinyuCodes/8.2CDevSecOp'
